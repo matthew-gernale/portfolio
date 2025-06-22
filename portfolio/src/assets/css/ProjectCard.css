@@ -1,0 +1,28 @@
+.card {
+    overflow: hidden;
+    box-shadow: 0 0 20px -10px rgba(0, 0, 0, 0.25);
+    transition: 0.2s;
+}
+
+    .card:hover {
+        transform: translateY(-20px);
+        background-color: #222222;
+        color: #fff;
+    }
+
+        .card:hover .snap {
+            border: 1px solid white;
+        }
+
+        .card:hover .btn {
+            border: 1px solid white;
+        }
+
+.btn {
+    transition: 0.2s;
+}
+
+    .btn:hover {
+        background-color: #fff;
+        color: #222222;
+    }
