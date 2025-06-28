@@ -1,114 +1,84 @@
-import ProfileCard from '../components/ProfileCard'
-import AvatarUrl from '../assets/images/matt.jpg'
-import DecryptedText from '../components/DecryptedText'
-import CountUp from '../components/CountUp'
-import AnimatedList from '../components/AnimatedList'
+
+import { useState, useEffect, useRef } from 'react'
+import AvatarUrl from '../assets/images/grad-pic.png'
+import CV from '../assets/John Matthew Gernale Resume.pdf'
+
+import HeaderTitle from '../components/HeaderTitle'
+import SkillSetContainer from '../components/SkillSetContainer'
+import { SquareUserRound, GraduationCap, CodeXml } from 'lucide-react'
+import DownloadIcon from '../assets/png-icons/dl-icon.png'
 
 
 const AboutSection = () => {
+    const contentRef = useRef(null);
+    const [contentHeight, setContentHeight] = useState(0);
+
+    useEffect(() => {
+        if (contentRef.current) {
+            setContentHeight(contentRef.current.offsetHeight);
+        }
+    }, []);
+
+    const technicalSkills = ['C#', 'JavaScript', 'TypeScript', '.Net', 'React', 'Blazor', 'Tailwind', 'MudBlazor', 'Fluent UI', 'MSSQL', 'Git', 'EF Core', 'LINQ', 'Azure', 'Face API', 'OpenAI API', 'POSTMAN', 'RESTful API', 'SOLID Principle', 'DRY', 'Design Pattern'];
+    const softSkills = ['Problem Solving', 'Client Communication', 'Collaboration', 'Agile/Scrum', 'Presentation', 'Timeliness', 'Quality Output'];
     return (
-        <section className="flex flex-col gap-3 px-[40px] bg-white py-[50px]">
-            <div className="flex gap-[50px]">
-                <ProfileCard
-                    name="Matt Gernale"
-                    title="System Developer"
-                    handle="matt4youu"
-                    status="Online"
-                    contactText="Contact Me"
-                    avatarUrl={AvatarUrl}
-                    showUserInfo={true}
-                    enableTilt={false}
-                    onContactClick={() => console.log('Contact clicked')} />
+        <section className="flex flex-col gap-3 px-[10px] md:px-[40px] bg-white py-[50px]" id='aboutPage'>
+            <div className="flex gap-[50px] justify-center">
+
                 <div>
-                    <div className="backdrop-blur-xl bg-gradient-to-br from-white/30 via-white/10 to-white/5 border border-gray-300 rounded-2xl shadow-xl p-6">
-                        <p className="text-[40px] font-semibold mb-2">
-                            <DecryptedText
-                                text="About Me"
-                                animateOn="view"
-                                revealDirection="start"
-                                speed="60"
-                                maxIterations="10"
+                    <div className="about-container mb-[20px] flex flex-col md:flex-row items-center md:items-start gap-[40px]">
+                        {/* Profile Image */}
+                        <div
+                            className="hidden sm:block glass-avatar-wrapper relative rounded-xl overflow-hidden backdrop-blur-lg shadow-2xl border border-white/20"
+                            style={{ height: contentHeight }}
+                        >
+                            <img
+                                src={AvatarUrl}
+                                alt="Profile"
+                                className="w-full h-full object-cover rounded-lg"
                             />
-                        </p>
-                        <p className="text-[15px]">
-                            <DecryptedText
-                                text="I am a System Developer with over a year of experience in developing ERP systems tailored to client-specific business processes. I focus on innovation and quality using best practices like SOLID principles, DRY, and design patterns."
-                                animateOn="view"
-                                revealDirection="start"
-                                speed="60"
-                                maxIterations="10"
-                            />
-                        </p>
+
+                            {/* Glass Shine Overlay */}
+                            <div className="absolute inset-0 bg-white/10 rounded-lg pointer-events-none" />
+
+                            {/* Diagonal Shine Animation */}
+                            <div className="absolute inset-0 shine-effect" />
+                        </div>
+
+                        {/* About Details */}
+                        <div ref={contentRef} className="text-slate-700 max-w-[600px]">
+                            <HeaderTitle title="About" icon={<SquareUserRound className="stroke-[1px]" />} />
+                            <p className="text-[14px] leading-relaxed">
+                                I am a System Developer with over a year of experience in developing ERP systems tailored to client-specific business processes. I focus on innovation and quality using best practices like SOLID principles, DRY, and design patterns.
+                            </p>
+
+                            <HeaderTitle title="Skills" icon={<CodeXml className="stroke-[1px]" />} className="pt-[30px]" />
+                            <SkillSetContainer
+                                title='Technical Skills'
+                                skills={technicalSkills}
+                                itemClassName='bg-blue-200 border border-blue-600 rounded-full text-blue-600'
+                                className='pb-[15px]' />
+                            <SkillSetContainer
+                                title='Soft Skills'
+                                skills={softSkills}
+                                itemClassName='bg-green-200 border border-green-500 rounded-full text-green-600'
+                                className='' />
+
+                            <div className="h-[1px] bg-slate-300 rounded-sm my-[10px]" />
+
+
+                            <a
+                                href={CV}
+                                target="_blank"
+                                rel="noreferrer"
+                                className="btn px-5 py-7 rounded-md flex text-nowrap gap-7 text-sm items-center justify-center overflow-hidden"
+                            >
+                                <img src={DownloadIcon} className="w-5" />
+                                <span className="">Download CV</span>
+                            </a>
+                        </div>
                     </div>
 
-
-                    <div className="backdrop-blur-xl bg-gradient-to-br from-white/30 via-white/10 to-white/5 border border-gray-300 rounded-2xl shadow-xl p-6 mt-[50px]">
-                        <p className="text-[40px] font-semibold mb-2">
-                            <DecryptedText
-                                text="Educational Background"
-                                animateOn="view"
-                                revealDirection="start"
-                                speed="60"
-                                maxIterations="10"
-                            />
-                        </p>
-                        <p className="text-[15px] font-semibold">
-                            <DecryptedText
-                                text="Bachelor of Science in Computer Enineering"
-                                animateOn="view"
-                                revealDirection="start"
-                                speed="60"
-                                maxIterations="10"
-                            />
-                        </p>
-                        <p className="text-[15px]">
-                            <DecryptedText
-                                text="Polytechnic University of the Philippines"
-                                animateOn="view"
-                                revealDirection="start"
-                                speed="60"
-                                maxIterations="10"
-                            />
-                        </p>
-                        <p className="text-[15px]">
-                            <CountUp
-                                from={2001}
-                                to={2019}
-                                separator=""
-                                direction="up"
-                                duration={1}
-                                className="count-up-text"
-                            />
-
-                            <span className="px-[5px]">-</span>
-
-                            <CountUp
-                                from={2001}
-                                to={2023}
-                                separator=""
-                                direction="up"
-                                duration={1}
-                                className="count-up-text"
-                            />
-                        </p>
-                    </div>
-                </div>
-            </div>
-            
-            <div>
-                <p className="text-2xl font-semibold mb-2">Experience</p>
-                <div>
-                    <p><strong>SBC Simplified Business Consultancy</strong> <br />
-                        Junior Developer (Mar 2024 - Sept 2024) <br />
-                        Junior Developer Level 2 (Sept 2024 - Mar 2025) <br />
-                        System Developer (Mar 2025 - Present) <br />
-                        <br />
-                        Key Achievements:</p>
-                    <ul className="list-disc list-inside ml-4">
-                        <li>Developed customized ERP systems</li>
-                        <li>Integrated AI and payment gateway APIs</li>
-                        <li>Received "Consistent Achiever Award" (Dec 20, 2024)</li>
-                    </ul>
                 </div>
             </div>
         </section>

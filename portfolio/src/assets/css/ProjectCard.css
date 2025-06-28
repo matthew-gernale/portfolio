@@ -1,28 +1,45 @@
 .card {
     overflow: hidden;
-    box-shadow: 0 0 20px -10px rgba(0, 0, 0, 0.25);
+    position: relative;
+    background-color: rgba(234,235,236, 0.3);
+    backdrop-filter: blur(2px);
+    border: 1px solid #cad5e2;
+    box-shadow: inset 1px 1px 3px rgba(255, 255, 255, 0.6), inset -1px -1px 3px rgba(0, 0, 0, 0.1);
     transition: 0.2s;
-}
+    animation: appear linear;
+    animation-timeline: view();
+    animation-range: entry 0 cover 35%;
+} 
+
+    .card::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient( 120deg, rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0) 60% );
+        transform: translateX(100%) rotate(25deg); 
+        transition: transform 0.7s ease-in-out;
+        pointer-events: none;
+    }
 
     .card:hover {
-        transform: translateY(-20px);
-        background-color: #222222;
-        color: #fff;
+        backdrop-filter: blur(5px);
+        background-color: rgba(234,235,236, 0.7);
+    }
+        .card:hover::before {
+            transform: translateX(-100%) rotate(25deg);
+        }
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: scale(0.4);
     }
 
-        .card:hover .snap {
-            border: 1px solid white;
-        }
-
-        .card:hover .btn {
-            border: 1px solid white;
-        }
-
-.btn {
-    transition: 0.2s;
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
-
-    .btn:hover {
-        background-color: #fff;
-        color: #222222;
-    }

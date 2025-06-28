@@ -8,6 +8,7 @@ import {
     useVelocity,
     useAnimationFrame,
 } from "framer-motion";
+import "../assets/css/ScrollVelocity.css";
 
 function useElementWidth(ref) {
     const [width, setWidth] = useState(0);
@@ -35,8 +36,8 @@ export const ScrollVelocity = ({
     stiffness = 400,
     numCopies = 6,
     velocityMapping = { input: [0, 1000], output: [0, 5] },
-    parallaxClassName,
-    scrollerClassName,
+    parallaxClassName = "parallax",
+    scrollerClassName = "scroller",
     parallaxStyle,
     scrollerStyle,
 }) => {
@@ -55,9 +56,7 @@ export const ScrollVelocity = ({
         scrollerStyle,
     }) {
         const baseX = useMotionValue(0);
-        const scrollOptions = scrollContainerRef
-            ? { container: scrollContainerRef }
-            : {};
+        const scrollOptions = scrollContainerRef ? { container: scrollContainerRef } : {};
         const { scrollY } = useScroll(scrollOptions);
         const scrollVelocity = useVelocity(scrollY);
         const smoothVelocity = useSpring(scrollVelocity, {
@@ -100,25 +99,18 @@ export const ScrollVelocity = ({
         });
 
         const spans = [];
-        for (let i = 0; i < (numCopies ?? 1); i++) {
+        for (let i = 0; i < numCopies; i++) {
             spans.push(
-                <span
-                    className={`flex-shrink-0 ${className}`}
-                    key={i}
-                    ref={i === 0 ? copyRef : null}
-                >
+                <span className={className} key={i} ref={i === 0 ? copyRef : null}>
                     {children}
                 </span>
             );
         }
 
         return (
-            <div
-                className={`${parallaxClassName} relative overflow-hidden`}
-                style={parallaxStyle}
-            >
+            <div className={parallaxClassName} style={parallaxStyle}>
                 <motion.div
-                    className={`${scrollerClassName} flex whitespace-nowrap text-center font-sans text-4xl font-bold tracking-[-0.02em] drop-shadow md:text-[5rem] md:leading-[5rem]`}
+                    className={scrollerClassName}
                     style={{ x, ...scrollerStyle }}
                 >
                     {spans}
@@ -128,7 +120,7 @@ export const ScrollVelocity = ({
     }
 
     return (
-        <section>
+        <div>
             {texts.map((text, index) => (
                 <VelocityText
                     key={index}
@@ -147,7 +139,7 @@ export const ScrollVelocity = ({
                     {text}&nbsp;
                 </VelocityText>
             ))}
-        </section>
+        </div>
     );
 };
 

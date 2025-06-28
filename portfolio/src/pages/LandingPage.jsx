@@ -4,7 +4,7 @@ import RotatingText from '../components/RotatingText';
 
 const LandingPage = () => {
     return (
-        <section className="text-center space-y-2 mb-12 flex flex-col items-center justify-center relative" style={{ marginTop: '-68px' }}>
+        <section className="text-center space-y-2 px-[20px] sm:px-[10px] mb-12 flex flex-col items-center justify-center relative" style={{ marginTop: '-68px' }} id='landingPage'>
 
             <SplitText
                 text="Hi there! I am"
@@ -22,7 +22,7 @@ const LandingPage = () => {
 
             <SplitText
                 text="JOHN MATTHEW T. GERNALE"
-                className="text-6xl font-bold text-center"
+                className="text-3xl sm:text-6xl font-bold text-center"
                 delay={100}
                 duration={0.3}
                 ease="power3.out"

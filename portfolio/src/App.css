@@ -1,6 +1,7 @@
 
 section {
     min-height: 100vh;
+    width: 100%;
 }
 
 .dock-outer {
@@ -86,3 +87,114 @@ section {
     display: inline-block;
 }
 
+.scroll-mask-container {
+    position: relative;
+    overflow: hidden;
+    mask-image: linear-gradient(to right, transparent, white 50%, white 50%, transparent);
+    mask-repeat: no-repeat;
+    mask-size: 100% 100%;
+}
+
+
+.about-container {
+    border-radius: 15px;
+    background: linear-gradient(145deg, #e6e6e6, #ffffff);
+    box-shadow: 6px 6px 12px #d1d1d1, -6px -6px 12px #ffffff;
+    padding: 25px;
+    animation: appear linear;
+    cursor: default;
+    user-select: none;
+    animation-timeline: view();
+    animation-range: entry 0% cover 40%;
+    border-left: 5px solid #45556c !important;
+    border: 1px solid #45556c;
+}
+.glass-avatar-wrapper {
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Shine animation */
+.shine-effect::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, 0.25) 50%, transparent 70%);
+    transform: rotate(25deg);
+    animation: shineMove 3s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes shineMove {
+    0% {
+        transform: translateX(-100%) rotate(25deg);
+    }
+
+    100% {
+        transform: translateX(100%) rotate(25deg);
+    }
+}
+
+
+.btn {
+    background-color: #222222;
+    color: #fff;
+    font-family: "Archivo Black";
+    width: 150px;
+    height: 50px;
+    transition: 0.2s;
+}
+
+    .btn img {
+        transform: translateX(-70px);
+        transition: 0.1s;
+    }
+
+    .btn span {
+        transform: translateX(-25px);
+        transition: 0.05s;
+    }
+
+    .btn:hover {
+        width: 200px;
+    }
+
+        .btn:hover img {
+            transform: translateX(2px);
+        }
+
+        .btn:hover span {
+            transform: translateX(-5px);
+        }
+
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: scale(0.4);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.footer-icon {
+    border: 1px solid white;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.footer-icon:hover {
+    transform: scale(1.1);
+    background-color: var(--color-slate-700);
+    border: var(--color-slate-700);
+}
